@@ -1,0 +1,179 @@
+clear()
+open("Wavegen")
+open("Scope")
+Wavegen.Synchronization.text = "No sunchronization"
+Wavegen.Channel1.Simple.Type.text = "DC"
+
+var check = 0
+var a = 0
+var b = 0
+var c = 0
+var d = 0
+var e = 0
+var f = 0
+var g = 0
+var aa = 0
+var bb = 0
+var cc = 0
+
+function play(i){
+    Wavegen.Channel1.Simple.Offset.value = i
+    Wavegen.run()
+}
+function nod(i){
+    if(i == -6){return(a)}
+    else if(i == -7){return(b)}
+    else if(i == 1){return(c)}
+    else if(i == 2){return(d)}
+    else if(i == 3){return(e)}
+    else if(i == 4){return(f)}
+    else if(i == 5){return(g)}
+    else if(i == 6){return(aa)}
+    else if(i == 7){return(bb)}
+    else if(i == 10){return(cc)}
+}
+
+function dongfanghong(){
+    play(nod(5))
+    wait(1)
+    play(nod(5))
+    wait(0.5)
+    play(nod(6))
+    wait(0.5)
+    play(nod(2))
+    wait(1)
+    play(nod(2))
+    wait(1)
+    play(nod(1))
+    wait(1)
+    play(nod(1))
+    wait(0.5)
+    play(nod(-6))
+    wait(0.5)
+    play(nod(2))
+    wait(1)
+    play(nod(2))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(6))
+    wait(0.5)
+    play(nod(10))
+    wait(0.5)
+    play(nod(6))
+    wait(0.5)
+    play(nod(5))
+    wait(0.5)
+    play(nod(1))
+    wait(1)
+    play(nod(1))
+    wait(0.5)
+    play(nod(-6))
+    wait(0.5)
+    play(nod(2))
+    wait(1)
+    play(nod(2))
+    wait(1)
+}
+function songbie(){
+    play(nod(5))
+    wait(1)
+    play(nod(3))
+    wait(0.5)
+    play(nod(5))
+    wait(0.5)
+    play(nod(10))
+    wait(1)
+    play(nod(10))
+    wait(1)
+    play(nod(6))
+    wait(1)
+    play(nod(10))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(1))
+    wait(0.5)
+    play(nod(2))
+    wait(0.5)
+    play(nod(3))
+    wait(1)
+    play(nod(2))
+    wait(0.5)
+    play(nod(1))
+    wait(0.5)
+    play(nod(2))
+    wait(4)
+    play(nod(5))
+    wait(1)
+    play(nod(3))
+    wait(0.5)
+    play(nod(5))
+    wait(0.5)
+    play(nod(10))
+    wait(1.5)
+    play(nod(7))
+    wait(0.5)
+    play(nod(6))
+    wait(1)
+    play(nod(10))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(5))
+    wait(1)
+    play(nod(2))
+    wait(0.5)
+    play(nod(3))
+    wait(0.5)
+    play(nod(4))
+    wait(1.5)
+    play(nod(-7))
+    wait(0.5)
+    play(nod(1))
+    wait(1)
+}
+
+function calibration(){
+    for(var idx = 0.3;wait(0.1) && idx < 0.7; idx+=0.001){
+        Wavegen.Channel1.Simple.Offset.value = idx
+        freq = Scope.Channel1.measure("Frequency")
+        if(freq >= 446 && freq <= 456 && a == 0){print("-6: "+idx), a = idx}
+        else if(freq >= 494 && freq <= 504 && b == 0){print("-7: "+idx), b = idx}
+        else if(freq >= 523 && freq <= 533 && c == 0){print("1: "+idx), c = idx}
+        else if(freq >= 587 && freq <= 597 && d == 0){print("2: "+idx),d = idx}
+        else if(freq >= 659 && freq <= 669 && e == 0){print("3: "+idx), e = idx}
+        else if(freq >= 698 && freq <= 708 && f == 0){print("4: "+idx), f = idx}
+        else if(freq >= 784 && freq <= 794 && g == 0){print("5: "+idx), g = idx}
+        else if(freq >= 880 && freq <= 890 && aa == 0){print("6: "+idx), aa = idx}
+        else if(freq >= 988 && freq <= 998 && bb == 0){print("7: "+idx), bb = idx}
+        else if(freq >= 1046 && freq <= 1056 && cc == 0){print("10: "+idx), cc = idx}
+    }
+    Wavegen.Channel1.Simple.Offset.value = 0
+    check = 1
+}
+
+
+calibration()
+if(check == 0){
+    var a = 0.363
+    var b = 0.384
+    var c = 0.396
+    var d = 0.419
+    var e = 0.439
+    var f = 0.448
+    var g = 0.47
+    var aa = 0.53
+    var bb = 0.602
+    var cc = 0.64
+}
+songbie()
+Wavegen.Channel1.Simple.Offset.value = 0
